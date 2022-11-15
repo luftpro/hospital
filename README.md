@@ -1,8 +1,10 @@
 # hospital
+Hospital Management System
 CSCI361 Lab 4 Project Team 1
-Check uml.pdf for uml diagram
 
-Project milestone 1 already done, but would need adjustments
+To access admin page, go to http://127.0.0.1:8000/admin/ and login under staff login/password
 
-Use git checkout dev to switch to dev branch, then commit and push to dev your
-stable commits
+Doctors and patients are profiles, which are created in relation to registered users. Create
+a user before assigning a profile, then fill out the fields. A user could be both patient and doctor.
+
+IIN field must contain 12 digits, ID Number should contain 9 digits

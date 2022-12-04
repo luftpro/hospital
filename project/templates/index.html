@@ -1,16 +1,16 @@
 {% load static %}
 <!doctype html>
 <html lang="en">
-  
-{% if messages %}
-  <ul class="messages">
-      {% for message in messages %}
-      <li  {% if message.tags %} class=" {{ message.tags }} " {% endif %}> {{ message }} </li>
-      {% endfor %}
-  </ul>
-  {% endif %}
 
-  <head>
+{% if messages %}
+<ul class="messages">
+  {% for message in messages %}
+  <li {% if message.tags %} class=" {{ message.tags }} " {% endif %}> {{ message }} </li>
+  {% endfor %}
+</ul>
+{% endif %}
+
+<head>
   <!-- Required meta tags -->
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -44,17 +44,17 @@
               {% csrf_token %}
               <div class="form-body">
                 <div class="row form-row">
-                  <input type="text" id="doctors" name = "name" placeholder="Enter Full name" class="form-control">
+                  <input type="text" id="doctors" name="name" placeholder="Enter Full name" class="form-control">
                 </div>
                 <div class="row form-row">
-                  <input type="text" id="mobile" name = "phone" placeholder="Enter Mobile Number" class="form-control">
+                  <input type="text" id="mobile" name="phone" placeholder="Enter Mobile Number" class="form-control">
                 </div>
                 <div class="row form-row">
-                  <input type="text" id="email" name = "email" placeholder="Enter Email Adreess" class="form-control">
+                  <input type="text" id="email" name="email" placeholder="Enter Email Adreess" class="form-control">
                 </div>
 
                 <div class="row form-row">
-                  <input id="dat" type="text" name = "date" placeholder="Appointment Date" class="form-control">
+                  <input id="dat" type="text" name="date" placeholder="Appointment Date" class="form-control">
                 </div>
                 <div class="row form-row">
                   <label for="Time slot" id="time"> Time slot: </label>
@@ -95,7 +95,7 @@
 
                 <div class="row form-row">
 
-                  <button type = "submit" class="btn btn-success btn-appointment" id="q">
+                  <button type="submit" class="btn btn-success btn-appointment" id="q">
                     Book Appointment
                   </button>
 
@@ -127,7 +127,7 @@
 
 <script>
   $(document).ready(function () {
-    $("#dat").datepicker({format: "dd/mm/yyyy",});
+    $("#dat").datepicker({ format: "dd/mm/yyyy", });
   })
 
 
@@ -163,8 +163,8 @@
     d.innerHTML = "Doctor: " + localStorage.getItem("dname");
     t.innerHTML = "Time Slot: " + localStorage.getItem("dslot");
     document.getElementById("selectbox").value = localStorage.getItem("se");
-    document.cookie="diin=" + localStorage.getItem("iin");
-    document.cookie="tinterval=" + localStorage.getItem("dslot");
+    document.cookie = "diin=" + localStorage.getItem("iin");
+    document.cookie = "tinterval=" + localStorage.getItem("dslot");
   }
 
 

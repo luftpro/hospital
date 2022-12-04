@@ -1,10 +1,29 @@
 from django.contrib import admin
 from accounts.models import User, Patient, Doctor
+from appointment.models import Appointment
 from django.contrib.auth.hashers import make_password
 
 admin.site.site_header = 'Hospital Management'
 admin.site.index_title = 'Hospital Management System'
 admin.site.site_title = 'Hospital Management'
+
+class AppointmentAdmin(admin.ModelAdmin):
+    model = Appointment
+    list_display = (
+        'name',
+        'phone',
+        'date',
+        'email',
+        'time_begin',
+        'time_end',
+        'doc_name',
+        'doc_lastname',
+        'doctor_iin'
+    )
+    def doc_name(self, obj):
+        return obj.doc.first_name
+    def doc_lastname(self, obj):
+        return obj.doc.last_name
 
 class UserAdmin(admin.ModelAdmin):
     list_display = ('username', 'is_patient', 'is_doctor', 'is_staff', 'is_active')
@@ -96,3 +115,4 @@ class DoctorAdmin(admin.ModelAdmin):
         return obj.user.username
 
 admin.site.register(User, UserAdmin)
+admin.site.register(Appointment, AppointmentAdmin)

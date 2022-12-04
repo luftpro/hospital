@@ -1,0 +1,196 @@
+{% load static %}
+<!doctype html>
+<html lang="en">
+  
+{% if messages %}
+  <ul class="messages">
+      {% for message in messages %}
+      <li  {% if message.tags %} class=" {{ message.tags }} " {% endif %}> {{ message }} </li>
+      {% endfor %}
+  </ul>
+  {% endif %}
+
+  <head>
+  <!-- Required meta tags -->
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
+  <link rel="stylesheet" href="{% static 'css/datepicker.css' %}">
+  <link rel="stylesheet" href="{% static 'css/style.css' %}">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
+  <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.13.2/themes/smoothness/jquery-ui.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.13.2/jquery-ui.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/chosen/1.8.7/chosen.jquery.min.js"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/chosen/1.8.7/chosen.min.css">
+</head>
+
+<body>
+  <div class="inner-layer">
+    <div class="container">
+      <div class="row no-margin">
+        <div class="col-sm-7">
+          <div class="content">
+            <h1>Make appointment with the best doctors</h1>
+            <p> Project made for Software Enginnering course </p>
+            <h2>For Help Call : +77777777</h2>
+          </div>
+        </div>
+        <div class="col-sm-5">
+          <div class="form-data">
+            <div class="form-head">
+              <h2 style="margin-left: 3%;">Doctor Appointment</h2>
+            </div>
+            <form action="" method="POST">
+              {% csrf_token %}
+              <div class="form-body">
+                <div class="row form-row">
+                  <input type="text" id="doctors" name = "name" placeholder="Enter Full name" class="form-control">
+                </div>
+                <div class="row form-row">
+                  <input type="text" id="mobile" name = "phone" placeholder="Enter Mobile Number" class="form-control">
+                </div>
+                <div class="row form-row">
+                  <input type="text" id="email" name = "email" placeholder="Enter Email Adreess" class="form-control">
+                </div>
+
+                <div class="row form-row">
+                  <input id="dat" type="text" name = "date" placeholder="Appointment Date" class="form-control">
+                </div>
+                <div class="row form-row">
+                  <label for="Time slot" id="time"> Time slot: </label>
+                </div>
+                <div class="row form-row">
+
+                  <select class="form-control" id="selectbox"
+                    onchange="javascript: save_data(); location.href = this.value;">
+                    <option value="" disabled selected hidden>Doctor specialty</option>
+                    <option value="therapist">Therapist</option>
+                    <option value="surgeon">Surgeon</option>
+                    <option value="physiologist">Physiologist</option>
+                    <option value="psychologist">Psychologist</option>
+                  </select>
+
+
+
+                </div>
+                <!-- <div class = "bt-ok">
+                              <a href="doctor.html">
+                                <button class="btn btn-success btn-appointment" style = "margin-left: auto; margin-right: 0; display:block; margin-top:0;">
+                                  OK
+                                </button>
+                               </a>
+                             </div>
+                             -->
+
+
+
+
+                <div class="row form-row">
+
+                  <label for="doctor chosen" id="dc">Doctor:</label>
+
+                </div>
+
+
+
+                <div class="row form-row">
+
+                  <button type = "submit" class="btn btn-success btn-appointment" id="q">
+                    Book Appointment
+                  </button>
+
+                </div>
+
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</body>
+
+<!-- Optional JavaScript -->
+<!-- jQuery first, then Popper.js, then Bootstrap JS -->
+
+<script type="text/javascript">
+  $('.chosen').chosen()
+</script>
+
+<script src="{% static 'js/jquery-3.3.1.min.js' %}"></script>
+<script src="{% static 'js/popper.min.js' %}"></script>
+<script src="{% static 'js/bootstrap.min.js' %}"></script>
+<script src="{% static 'js/bootstrap-datepicker.js' %}"></script>
+
+
+
+<script>
+  $(document).ready(function () {
+    $("#dat").datepicker({format: "dd/mm/yyyy",});
+  })
+
+
+</script>
+<script>
+  function save_data() {
+    var mob = document.getElementById("mobile");
+    var doc = document.getElementById("doctors");
+    var em = document.getElementById("email");
+    var dt = document.getElementById("dat");
+
+    localStorage.setItem("doc_name", doc.value);
+    localStorage.setItem("m_num", mob.value);
+    localStorage.setItem("em", em.value);
+    localStorage.setItem("dt", dt.value);
+
+    console.log(localStorage.getItem("m_num"));
+  }
+
+  function load_data() {
+    var mob = document.getElementById("mobile");
+    var doc = document.getElementById("doctors");
+    var em = document.getElementById("email");
+    var dt = document.getElementById("dat");
+    var t = document.getElementById("time");
+    var d = document.getElementById("dc");
+
+
+    mob.value = localStorage.getItem("m_num");
+    doc.value = localStorage.getItem("doc_name");
+    em.value = localStorage.getItem("em");
+    dt.value = localStorage.getItem("dt");
+    d.innerHTML = "Doctor: " + localStorage.getItem("dname");
+    t.innerHTML = "Time Slot: " + localStorage.getItem("dslot");
+    document.getElementById("selectbox").value = localStorage.getItem("se");
+    document.cookie="diin=" + localStorage.getItem("iin");
+    document.cookie="tinterval=" + localStorage.getItem("dslot");
+  }
+
+
+  ///////
+
+  //const changeSelected = (e) => {
+  //const $select = document.querySelector('#cat');
+  //$select.value = 'lin'
+  //};
+
+  //document.querySelector('.q').addEventListener('click', q);
+  //////
+  if (localStorage.length != 0) {
+    load_data();
+  }
+  localStorage.clear();
+
+</script>
+
+<script type="javascript/text" src="{% static 'js/comp.js' %}">
+    </script>
+<script>
+  var countries = ['Surgeon', 'Psychologist', 'Therapist', 'Physiologist'];
+  autocomplete(document.getElementById("selectbox"), countries);
+</script>
+
+</body>
+
+</html>

@@ -121,3 +121,6 @@ class Doctor(models.Model):
     )
     address = models.CharField(max_length=200, blank=True)
     homepage = models.URLField(max_length=254, blank=True)
+    
+    def __str__(self):
+        return self.user.username

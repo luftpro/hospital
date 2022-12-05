@@ -1,20 +1,24 @@
 <div class="row" style="margin-bottom: 3%;">
-  <h1> Therapist</h1>
-  <h1 style="margin-left: 17%"> Doctor name</h1>
-  <h1 style="margin-left: 5%"> Time slots</h1>
+  
 </div>
 
 <div class="row">
   <div class="column">
     {% for d in doctor %}
     {% if d.department_id == 1 %}
-    <div class="row">
+    <div cass="row">
+      <div class="cont">
+      <div class="ph">
       {% if d.photo %}
       <img src="{{ d.photo.url }}">
       {% endif %}
+      </div>
+      <div class="para">
       <h3 id="{{ d.iin_number }}">{{ d.first_name }} {{ d.last_name }}</h3>
+      <p>Description: Lorem ipsum dolor sit amet.</p>
+      </div>
 
-
+      <div class="qwe">
       <form action="/index">
         <button class="btn btn-success btn-appointment" onclick="passvalues(this.id, '{{ d.iin_number }}');" id="10">10:00-11:00</button>
         <button class="btn btn-success btn-appointment" onclick="passvalues(this.id, '{{ d.iin_number }}');" id="11">11:00-12:00</button>
@@ -25,6 +29,8 @@
         <button class="btn btn-success btn-appointment" onclick="passvalues(this.id, '{{ d.iin_number }}');" id="16">16:00-17:00</button>
         <button class="btn btn-success btn-appointment" onclick="passvalues(this.id, '{{ d.iin_number }}');" id="17">17:00-18:00</button>
       </form>
+      </div>
+    </div>
     </div>
     {% endif %}
     {% endfor %}
@@ -32,27 +38,77 @@
 </div>
 
 <style>
+  body {
+    background-color: lightblue;
+  }
+
+  .cont {
+    background-color: white;
+    display: flex;
+    width: 70%;
+    height: 20rem;
+    vertical-align: auto;
+    text-align: center;
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 10px;
+    border: #4d5a5f;
+    border-width: 3px;
+    border-radius: 5%;
+    padding-top: 2rem;
+    padding-left: 2rem;
+    box-shadow: -0.5em -0.25em rgb(126, 124, 124);
+  }
+
+  .ph {
+    margin-right: 2 em;
+  }
+
+  .para {
+    text-align: center;
+    vertical-align: middle;
+    margin-left: 2px;
+    width: 20rem;
+  }
+
+  .qwe button {
+    background-color: #006c9b;
+    /* Green background */
+    border: 1px solid rgb(232, 232, 232);
+    /* Green border */
+    border-radius: 5px;
+    color: white;
+    /* White text */
+    padding: 10px 24px;
+    /* Some padding */
+    cursor: pointer;
+    /* Pointer/hand icon */
+    width: 25rem;
+    /* Set a width if needed */
+    display: block;
+    /* Make the buttons appear below each other */
+    height: 2.2rem;
+  }
+
+  .qwe button:not(:last-child) {
+    border-bottom: none;
+    /* Prevent double borders */
+  }
+
+  /* Add a background color on hover */
+  .qwe button:hover {
+    background-color: #3e8e41;
+  }
+
   h1 {
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     font-size: large;
     margin-left: 8%;
   }
 
-  button {
-    width: 50;
-    height: 50;
-    border-radius: 5px;
-    background-color: aquamarine;
-
-  }
-
-  h3 {
-    margin-left: 5%;
-    margin-right: 5%;
-  }
-
   img {
-    width: 400px;
+    margin-left: 3%;
+    width: 200px;
     height: auto
   }
 
@@ -71,11 +127,20 @@
   .column img {
     margin-top: 8px;
     vertical-align: middle;
+
   }
 
   button {
-    width: 50;
-    height: 50
+    width: 200;
+    height: 50;
+    border-radius: 2px;
+    background-color: aquamarine;
+
+  }
+
+  h3 {
+    margin-left: 5%;
+    margin-right: 5%;
   }
 </style>
 
